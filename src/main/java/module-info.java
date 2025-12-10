@@ -1,0 +1,32 @@
+module com.example.demo2rusho {
+    requires javafx.controls;
+    requires javafx.fxml;
+    requires javafx.web;
+    requires org.controlsfx.controls;
+    requires com.dlsc.formsfx;
+    requires net.synedra.validatorfx;
+    requires org.kordamp.ikonli.javafx;
+    requires org.kordamp.bootstrapfx.core;
+    requires eu.hansolo.tilesfx;
+    requires com.almasb.fxgl.all;
+    requires org.slf4j;
+    requires java.sql;
+    requires com.zaxxer.hikari;
+    requires com.google.gson;
+    requires java.mail;
+    requires jbcrypt;
+    requires org.apache.commons.lang3;
+    requires org.jfree.jfreechart;
+    requires org.apache.httpcomponents.core5.httpcore5;
+    requires org.apache.httpcomponents.client5.httpclient5;
+    opens com.example.demo2rusho to javafx.fxml;
+    exports com.example.demo2rusho;
+    opens com.agriminds to javafx.fxml;
+    exports com.agriminds;
+    exports com.agriminds.model;
+    exports com.agriminds.view;
+    exports com.agriminds.controller;
+    exports com.agriminds.service;
+    exports com.agriminds.repository;
+    exports com.agriminds.util;
+}

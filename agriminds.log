@@ -1,0 +1,6 @@
+2025-12-10 21:21:08 [JavaFX Application Thread] INFO com.agriminds.AgriMindsApplication - Starting AgriMinds Application...
+2025-12-10 21:21:08 [JavaFX Application Thread] INFO com.agriminds.util.DatabaseConnection - Database connection pool initialized successfully
+2025-12-10 21:21:09 [JavaFX Application Thread] INFO com.agriminds.AgriMindsApplication - AgriMinds Application started successfully
+2025-12-10 21:21:22 [JavaFX Application Thread] INFO com.agriminds.AgriMindsApplication - Shutting down AgriMinds Application...
+2025-12-10 21:21:22 [JavaFX Application Thread] INFO com.agriminds.util.DatabaseConnection - Database connection pool closed
+2025-12-10 21:21:22 [JavaFX Application Thread] INFO com.agriminds.AgriMindsApplication - AgriMinds Application shut down successfully
