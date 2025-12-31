@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.agriminds.controller.DashboardTabController"
+      spacing="20" style="-fx-padding: 20;">
+
+    <Label fx:id="welcomeLabel" text="Welcome, User!">
+        <font>
+            <Font name="Arial Bold" size="24"/>
+        </font>
+    </Label>
+
+    <!-- Dashboard Control Buttons -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button fx:id="clearDashboardBtn" text="🗑 Clear Dashboard" onAction="#handleClearDashboard"
+                style="-fx-background-color: #FF5722; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8 15; -fx-background-radius: 5; -fx-cursor: hand;"/>
+        <Button fx:id="showHistoryBtn" text="📜 Previous History" onAction="#handleShowHistory"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 8 15; -fx-background-radius: 5; -fx-cursor: hand;"/>
+    </HBox>
+
+    <!-- Expert Answers Section -->
+    <VBox spacing="10">
+        <Label text="💡 Latest Answers from Experts">
+            <font>
+                <Font name="Arial Bold" size="18"/>
+            </font>
+        </Label>
+        <Separator/>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" prefHeight="250">
+            <VBox fx:id="expertAnswersContainer" spacing="10" style="-fx-padding: 10;">
+                <Label text="Loading expert answers..." style="-fx-text-fill: #888;"/>
+            </VBox>
+        </ScrollPane>
+    </VBox>
+</VBox>

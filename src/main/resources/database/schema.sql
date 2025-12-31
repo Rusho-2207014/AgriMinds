@@ -10,9 +10,7 @@ COLLATE utf8mb4_unicode_ci;
 
 USE agriminds_db;
 
--- ============================================
--- FARMERS TABLE
--- ============================================
+
 CREATE TABLE IF NOT EXISTS farmers (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
@@ -38,9 +36,7 @@ CREATE TABLE IF NOT EXISTS farmers (
     INDEX idx_division (division)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================
--- BUYERS TABLE
--- ============================================
+
 CREATE TABLE IF NOT EXISTS buyers (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
@@ -64,9 +60,7 @@ CREATE TABLE IF NOT EXISTS buyers (
     INDEX idx_district (district)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================
--- CROPS TABLE
--- ============================================
+
 CREATE TABLE IF NOT EXISTS crops (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     crop_name VARCHAR(100) NOT NULL,
@@ -86,9 +80,7 @@ CREATE TABLE IF NOT EXISTS crops (
     INDEX idx_season (season)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================
--- MARKET PRICES TABLE
--- ============================================
+
 CREATE TABLE IF NOT EXISTS market_prices (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     crop_id BIGINT,
@@ -110,9 +102,7 @@ CREATE TABLE IF NOT EXISTS market_prices (
     FOREIGN KEY (crop_id) REFERENCES crops(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================
--- SOIL HEALTH TABLE
--- ============================================
+
 CREATE TABLE IF NOT EXISTS soil_health (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     farmer_id BIGINT NOT NULL,
@@ -134,9 +124,7 @@ CREATE TABLE IF NOT EXISTS soil_health (
     FOREIGN KEY (farmer_id) REFERENCES farmers(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================
--- CROP DISEASES TABLE
--- ============================================
+
 CREATE TABLE IF NOT EXISTS crop_diseases (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     crop_id BIGINT,
@@ -157,9 +145,7 @@ CREATE TABLE IF NOT EXISTS crop_diseases (
     FOREIGN KEY (crop_id) REFERENCES crops(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================
--- WEATHER ALERTS TABLE
--- ============================================
+
 CREATE TABLE IF NOT EXISTS weather_alerts (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     district VARCHAR(50) NOT NULL,
@@ -182,9 +168,7 @@ CREATE TABLE IF NOT EXISTS weather_alerts (
     INDEX idx_is_active (is_active)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================
--- MARKETPLACE LISTINGS TABLE
--- ============================================
+
 CREATE TABLE IF NOT EXISTS marketplace_listings (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     farmer_id BIGINT NOT NULL,
@@ -212,9 +196,7 @@ CREATE TABLE IF NOT EXISTS marketplace_listings (
     FOREIGN KEY (crop_id) REFERENCES crops(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================
--- FERTILIZER RECOMMENDATIONS TABLE
--- ============================================
+
 CREATE TABLE IF NOT EXISTS fertilizer_recommendations (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     crop_id BIGINT NOT NULL,
@@ -232,9 +214,7 @@ CREATE TABLE IF NOT EXISTS fertilizer_recommendations (
     FOREIGN KEY (crop_id) REFERENCES crops(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================
--- SAMPLE DATA INSERTION
--- ============================================
+
 
 -- Insert sample crops
 INSERT INTO crops (crop_name, crop_name_bengali, category, season, growing_days, soil_type) VALUES
@@ -265,9 +245,7 @@ INSERT INTO crop_diseases (crop_id, disease_name, disease_name_bengali, severity
 
 COMMIT;
 
--- ============================================
--- EXPERTS TABLE
--- ============================================
+
 CREATE TABLE IF NOT EXISTS experts (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
@@ -288,9 +266,7 @@ CREATE TABLE IF NOT EXISTS experts (
     INDEX idx_verified (is_verified)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================
--- QUESTIONS TABLE (Farmer to Expert)
--- ============================================
+
 CREATE TABLE IF NOT EXISTS questions (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     farmer_id BIGINT NOT NULL,
@@ -314,9 +290,7 @@ CREATE TABLE IF NOT EXISTS questions (
     INDEX idx_category (category)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================
--- PRICE NEGOTIATIONS TABLE (Buyer-Farmer)
--- ============================================
+
 CREATE TABLE IF NOT EXISTS price_negotiations (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     crop_id BIGINT,
@@ -328,7 +302,9 @@ CREATE TABLE IF NOT EXISTS price_negotiations (
     farmer_price DECIMAL(10,2),
     buyer_offer DECIMAL(10,2),
     agreed_price DECIMAL(10,2),
+    quantity DECIMAL(10,2) DEFAULT 0,
     status VARCHAR(20) DEFAULT 'Pending',
+    accepted_date TIMESTAMP NULL,
     buyer_message TEXT,
     farmer_response TEXT,
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -341,9 +317,7 @@ CREATE TABLE IF NOT EXISTS price_negotiations (
     INDEX idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- ============================================
--- FARMER CROPS INVENTORY TABLE
--- ============================================
+
 CREATE TABLE IF NOT EXISTS farmer_crops (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     farmer_id BIGINT NOT NULL,
@@ -370,8 +344,20 @@ INSERT INTO experts (full_name, email, phone_number, password_hash, specializati
 ('Dr. Fatima Rahman', 'dr.fatima@agriminds.com', '01812345678', '$2a$10$dummyhash2', 'Soil Management', 'MSc in Soil Science', 10, 'Rajshahi', TRUE),
 ('Engr. Kamal Hossain', 'kamal.expert@agriminds.com', '01912345678', '$2a$10$dummyhash3', 'Pest Control', 'BSc in Agriculture', 8, 'Chittagong', TRUE);
 
+CREATE TABLE IF NOT EXISTS login_history (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    user_type ENUM('farmer', 'expert', 'buyer') NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ip_address VARCHAR(45),
+    device_info VARCHAR(255),
+    login_status ENUM('success', 'failed') DEFAULT 'success',
+    failure_reason VARCHAR(255),
+    INDEX idx_user (user_id, user_type),
+    INDEX idx_login_time (login_time),
+    INDEX idx_email (email)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 COMMIT;
 
--- ============================================
--- END OF SCHEMA
--- ============================================

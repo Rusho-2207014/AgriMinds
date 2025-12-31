@@ -1,4 +1,5 @@
 package com.agriminds.repository;
+
 import com.agriminds.model.FarmerCrop;
 import com.agriminds.util.DatabaseConnection;
 import org.slf4j.Logger;
@@ -7,13 +8,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 public class FarmerCropRepository {
     private static final Logger logger = LoggerFactory.getLogger(FarmerCropRepository.class);
+
     public Long save(FarmerCrop crop) {
         String sql = "INSERT INTO farmer_crops (farmer_id, crop_name, quantity, unit, selling_price, " +
-                    "harvest_date, is_available, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                "harvest_date, is_available, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setLong(1, crop.getFarmerId());
             stmt.setString(2, crop.getCropName());
             stmt.setDouble(3, crop.getQuantity());
@@ -38,11 +41,12 @@ public class FarmerCropRepository {
         }
         return null;
     }
+
     public List<FarmerCrop> findByFarmerId(Long farmerId) {
         String sql = "SELECT * FROM farmer_crops WHERE farmer_id = ? ORDER BY created_at DESC";
         List<FarmerCrop> crops = new ArrayList<>();
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setLong(1, farmerId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -54,10 +58,11 @@ public class FarmerCropRepository {
         }
         return crops;
     }
+
     public Optional<FarmerCrop> findById(Long id) {
         String sql = "SELECT * FROM farmer_crops WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
@@ -68,12 +73,13 @@ public class FarmerCropRepository {
         }
         return Optional.empty();
     }
+
     public boolean update(FarmerCrop crop) {
         String sql = "UPDATE farmer_crops SET crop_name = ?, quantity = ?, unit = ?, " +
-                    "selling_price = ?, harvest_date = ?, is_available = ?, description = ? " +
-                    "WHERE id = ?";
+                "selling_price = ?, harvest_date = ?, is_available = ?, description = ? " +
+                "WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, crop.getCropName());
             stmt.setDouble(2, crop.getQuantity());
             stmt.setString(3, crop.getUnit());
@@ -90,10 +96,11 @@ public class FarmerCropRepository {
         }
         return false;
     }
+
     public boolean delete(Long id) {
         String sql = "DELETE FROM farmer_crops WHERE id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setLong(1, id);
             int affected = stmt.executeUpdate();
             logger.info("Crop deleted: {}", affected > 0);
@@ -103,6 +110,7 @@ public class FarmerCropRepository {
         }
         return false;
     }
+
     private FarmerCrop mapResultSetToFarmerCrop(ResultSet rs) throws SQLException {
         FarmerCrop crop = new FarmerCrop();
         crop.setId(rs.getLong("id"));
@@ -127,5 +135,26 @@ public class FarmerCropRepository {
             crop.setUpdatedAt(updatedAt.toLocalDateTime());
         }
         return crop;
+    }
+
+    public List<FarmerCrop> getAllAvailableCrops() {
+        String sql = "SELECT * FROM farmer_crops WHERE is_available = true ORDER BY created_at DESC";
+        List<FarmerCrop> crops = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                crops.add(mapResultSetToFarmerCrop(rs));
+            }
+
+            logger.info("Retrieved {} available crops", crops.size());
+
+        } catch (SQLException e) {
+            logger.error("Error retrieving available crops", e);
+        }
+
+        return crops;
     }
 }

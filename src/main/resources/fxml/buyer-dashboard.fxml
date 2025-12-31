@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.agriminds.controller.BuyerController"
+            prefWidth="1200" prefHeight="800">
+    
+    <top>
+        <VBox>
+            <MenuBar>
+                <Menu text="File">
+                    <MenuItem text="Logout" onAction="#handleLogout"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="Exit" onAction="#handleExit"/>
+                </Menu>
+                <Menu text="Help">
+                    <MenuItem text="About" onAction="#handleAbout"/>
+                </Menu>
+            </MenuBar>
+            
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #1565C0; -fx-padding: 15;">
+                <Label fx:id="welcomeLabel" text="Welcome, Buyer" 
+                       style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="statsLabel" text="Available Crops: 0" 
+                       style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE">
+            
+            <!-- Available Crops Tab -->
+            <Tab text="🌾 Available Crops">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <Label text="Filter by Crop:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                        <ComboBox fx:id="cropFilterCombo" promptText="All Crops" prefWidth="150"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="🔄 Refresh" onAction="#refreshCrops" 
+                                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 8 20;"/>
+                    </HBox>
+                    
+                    <Separator/>
+                    
+                    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="cropsContainer" spacing="15" style="-fx-padding: 10;"/>
+                    </ScrollPane>
+                </VBox>
+            </Tab>
+            
+            <!-- My Negotiations Tab -->
+            <Tab text="💬 My Negotiations" fx:id="negotiationsTab">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <Label text="Your price negotiations" 
+                               style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="🔄 Refresh" onAction="#handleRefreshNegotiations"
+                                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 8 15; -fx-cursor: hand;"/>
+                    </HBox>
+                    <Separator/>
+                    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="negotiationsContainer" spacing="15" style="-fx-padding: 10;"/>
+                    </ScrollPane>
+                </VBox>
+            </Tab>
+            
+            <!-- Purchase History Tab -->
+            <Tab text="📦 Purchase History" fx:id="purchaseHistoryTab">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <HBox spacing="15" alignment="CENTER_LEFT">
+                        <Label text="Completed purchases" 
+                               style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="� Clear History" onAction="#handleClearPurchaseHistory"
+                                style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 8 15; -fx-cursor: hand;"/>
+                        <Button text="�🔄 Refresh" onAction="#handleRefreshPurchaseHistory"
+                                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 8 15; -fx-cursor: hand;"/>
+                    </HBox>
+                    <Separator/>
+                    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="purchaseHistoryContainer" spacing="15" style="-fx-padding: 10;"/>
+                    </ScrollPane>
+                </VBox>
+            </Tab>
+            
+        </TabPane>
+    </center>
+</BorderPane>

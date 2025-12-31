@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.agriminds.controller.QuestionsController"
+      spacing="20" style="-fx-padding: 20;">
+
+    <Label text="Ask Agricultural Expert">
+        <font>
+            <Font name="Arial Bold" size="24"/>
+        </font>
+    </Label>
+
+    <HBox spacing="10">
+        <Button fx:id="askQuestionBtn" text="+ Ask New Question" onAction="#handleAskQuestion"
+                style="-fx-background-color: #2E7D32; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;"/>
+        <Button fx:id="deleteAllBtn" text="🗑 Delete All Questions" onAction="#handleDeleteAllQuestions"
+                style="-fx-background-color: #D32F2F; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;"/>
+    </HBox>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+        <VBox fx:id="questionsContainer" spacing="10" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-padding: 20;"/>
+    </ScrollPane>
+</VBox>

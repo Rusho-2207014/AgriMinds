@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.agriminds.controller.MarketController"
+      spacing="20" style="-fx-padding: 20;">
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="💰 Market Prices">
+            <font>
+                <Font name="Arial Bold" size="24"/>
+            </font>
+        </Label>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="addPriceBtn" text="+ Add Price" onAction="#handleAddPrice"
+                style="-fx-background-color: #2E7D32; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 16;"/>
+        <Button fx:id="refreshBtn" text="🔄 Refresh" onAction="#handleRefresh"
+                style="-fx-background-color: #1976D2; -fx-text-fill: white; -fx-padding: 8 16;"/>
+    </HBox>
+
+    <Label text="View and add market prices for crops" style="-fx-text-fill: #666; -fx-font-size: 14px;"/>
+
+    <TabPane fx:id="marketTabPane" tabClosingPolicy="UNAVAILABLE">
+        <Tab fx:id="generalPricesTab" text="📊 General Market Prices">
+            <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+                <VBox fx:id="generalPricesContainer" spacing="10" style="-fx-padding: 10;">
+                    <Label text="Loading market prices..." style="-fx-text-fill: #888;"/>
+                </VBox>
+            </ScrollPane>
+        </Tab>
+        
+        <Tab fx:id="myCropPricesTab" text="🌾 My Crop Prices">
+            <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+                <VBox fx:id="myCropPricesContainer" spacing="10" style="-fx-padding: 10;">
+                    <Label text="Loading your crop prices..." style="-fx-text-fill: #888;"/>
+                </VBox>
+            </ScrollPane>
+        </Tab>
+    </TabPane>
+</VBox>

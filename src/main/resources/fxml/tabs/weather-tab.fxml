@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.agriminds.controller.WeatherController"
+      spacing="20" style="-fx-padding: 20;">
+
+    <Label text="Weather Forecast">
+        <font>
+            <Font name="Arial Bold" size="24"/>
+        </font>
+    </Label>
+
+    <Label fx:id="locationLabel" text="📍 Location: Bangladesh" style="-fx-font-size: 16px;"/>
+
+    <VBox spacing="15" style="-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-padding: 20;">
+        <Label text="Today: ☀️ Sunny, 28°C - 35°C" style="-fx-font-size: 14px;"/>
+        <Label text="Tomorrow: ⛅ Partly Cloudy, 27°C - 33°C" style="-fx-font-size: 14px;"/>
+        <Label text="⚠️ Weather Alert: Light rain expected in 3 days" style="-fx-text-fill: #ff6b00; -fx-font-weight: bold;"/>
+    </VBox>
+</VBox>

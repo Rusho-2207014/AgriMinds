@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.agriminds.controller.OffersController"
+      spacing="20" style="-fx-padding: 20;">
+
+    <Label text="Buyer Price Offers">
+        <font>
+            <Font name="Arial Bold" size="24"/>
+        </font>
+    </Label>
+
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Label text="Filter by status:" style="-fx-font-size: 14px;"/>
+        <ComboBox fx:id="statusFilter" prefWidth="150"/>
+        <Button fx:id="refreshButton" text="🔄 Refresh" onAction="#handleRefresh"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 8 15; -fx-cursor: hand;"/>
+    </HBox>
+
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-border-color: transparent;">
+        <VBox fx:id="offersContainer" spacing="15" style="-fx-padding: 10;"/>
+    </ScrollPane>
+</VBox>

@@ -1,6 +1,34 @@
-2025-12-10 21:21:08 [JavaFX Application Thread] INFO com.agriminds.AgriMindsApplication - Starting AgriMinds Application...
-2025-12-10 21:21:08 [JavaFX Application Thread] INFO com.agriminds.util.DatabaseConnection - Database connection pool initialized successfully
-2025-12-10 21:21:09 [JavaFX Application Thread] INFO com.agriminds.AgriMindsApplication - AgriMinds Application started successfully
-2025-12-10 21:21:22 [JavaFX Application Thread] INFO com.agriminds.AgriMindsApplication - Shutting down AgriMinds Application...
-2025-12-10 21:21:22 [JavaFX Application Thread] INFO com.agriminds.util.DatabaseConnection - Database connection pool closed
-2025-12-10 21:21:22 [JavaFX Application Thread] INFO com.agriminds.AgriMindsApplication - AgriMinds Application shut down successfully
+2025-12-31 21:05:06 [JavaFX Application Thread] INFO com.agriminds.AgriMindsApplication - Starting AgriMinds Application...
+2025-12-31 21:05:08 [JavaFX Application Thread] INFO com.agriminds.util.DatabaseConnection - Database connection pool initialized successfully
+2025-12-31 21:05:16 [JavaFX Application Thread] INFO com.agriminds.AgriMindsApplication - AgriMinds Application started successfully
+2025-12-31 21:06:20 [JavaFX Application Thread] INFO com.agriminds.repository.FarmerRepository - Farmer updated: true
+2025-12-31 21:06:20 [JavaFX Application Thread] INFO com.agriminds.service.FarmerService - Farmer authenticated successfully: Redoanul Karim
+2025-12-31 21:06:20 [JavaFX Application Thread] INFO com.agriminds.repository.LoginHistoryRepository - Found last login for user 1: 2025-12-30T18:42:29
+2025-12-31 21:06:20 [JavaFX Application Thread] INFO com.agriminds.repository.LoginHistoryRepository - Login history saved with ID: 287
+2025-12-31 21:06:20 [JavaFX Application Thread] INFO com.agriminds.controller.LoginController - User logged in successfully: karim2207014@stud.kuet.ac.bd
+2025-12-31 21:06:24 [JavaFX Application Thread] INFO com.agriminds.repository.RatingRepository - expert_ratings table verified/created successfully
+2025-12-31 21:06:25 [JavaFX Application Thread] INFO com.agriminds.service.AIService - Gemini AI Service initialized successfully
+2025-12-31 21:06:25 [JavaFX Application Thread] INFO com.agriminds.repository.RatingRepository - expert_ratings table verified/created successfully
+2025-12-31 21:06:26 [JavaFX Application Thread] INFO com.agriminds.repository.RatingRepository - expert_ratings table verified/created successfully
+2025-12-31 21:06:26 [JavaFX Application Thread] INFO com.agriminds.repository.RatingRepository - expert_ratings table verified/created successfully
+2025-12-31 21:06:27 [JavaFX Application Thread] INFO com.agriminds.repository.FarmerCropRepository - Found 8 crops for farmer 1
+2025-12-31 21:06:27 [JavaFX Application Thread] INFO com.agriminds.service.AIService - Gemini AI Service initialized successfully
+2025-12-31 21:06:27 [JavaFX Application Thread] INFO com.agriminds.repository.RatingRepository - expert_ratings table verified/created successfully
+2025-12-31 21:06:27 [JavaFX Application Thread] INFO com.agriminds.repository.FarmerCropRepository - Found 8 crops for farmer 1
+2025-12-31 21:06:27 [JavaFX Application Thread] INFO com.agriminds.repository.PriceNegotiationRepository - Retrieved 18 negotiations for farmer ID: 1
+2025-12-31 21:06:27 [JavaFX Application Thread] INFO com.agriminds.controller.OffersController - Retrieved 18 total offers for farmer ID: 1
+2025-12-31 21:06:27 [JavaFX Application Thread] INFO com.agriminds.repository.RatingRepository - expert_ratings table verified/created successfully
+2025-12-31 21:06:32 [JavaFX Application Thread] WARN com.agriminds.controller.MessagesController - currentFarmer is null, cannot load conversations
+2025-12-31 21:06:32 [JavaFX Application Thread] INFO com.agriminds.repository.MessageRepository - Retrieved 7 conversations for farmer: 1
+2025-12-31 21:06:37 [JavaFX Application Thread] INFO com.agriminds.repository.ExpertAnswerRepository - Retrieved 2 expert answers for question ID: 35
+2025-12-31 21:06:46 [JavaFX Application Thread] INFO com.agriminds.controller.QuestionsController - Opening rating dialog for expert: Karim (ID: 8)
+2025-12-31 21:06:52 [JavaFX Application Thread] INFO com.agriminds.repository.RatingRepository - Rating saved: Expert 8 rated 5 stars by farmer 1
+2025-12-31 21:06:52 [JavaFX Application Thread] INFO com.agriminds.controller.QuestionsController - Rating saved: 5 stars for expert 8
+2025-12-31 21:06:57 [Thread-3] INFO com.agriminds.controller.QuestionsController - Requesting AI answer for question ID: 35
+2025-12-31 21:07:16 [Thread-3] INFO com.agriminds.service.AIService - Successfully generated AI answer for question in category: Disease (রোগ)
+2025-12-31 21:07:16 [JavaFX Application Thread] INFO com.agriminds.repository.QuestionRepository - Question 35 answered by AI
+2025-12-31 21:07:16 [JavaFX Application Thread] INFO com.agriminds.controller.QuestionsController - AI answer generated successfully in 18 seconds
+2025-12-31 21:07:21 [JavaFX Application Thread] INFO com.agriminds.repository.ExpertAnswerRepository - Retrieved 2 expert answers for question ID: 35
+2025-12-31 21:08:19 [JavaFX Application Thread] INFO com.agriminds.AgriMindsApplication - Shutting down AgriMinds Application...
+2025-12-31 21:08:19 [JavaFX Application Thread] INFO com.agriminds.util.DatabaseConnection - Database connection pool closed
+2025-12-31 21:08:19 [JavaFX Application Thread] INFO com.agriminds.AgriMindsApplication - AgriMinds Application shut down successfully

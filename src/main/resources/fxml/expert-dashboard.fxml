@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.agriminds.controller.ExpertController"
+            prefWidth="1200" prefHeight="800">
+    
+    <top>
+        <VBox>
+            <MenuBar>
+                <Menu text="File">
+                    <MenuItem text="Logout" onAction="#handleLogout"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="Exit" onAction="#handleExit"/>
+                </Menu>
+                <Menu text="Help">
+                    <MenuItem text="About" onAction="#handleAbout"/>
+                </Menu>
+            </MenuBar>
+            
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #2E7D32; -fx-padding: 15;">
+                <Label fx:id="welcomeLabel" text="Welcome, Expert" 
+                       style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="statsLabel" text="Pending Questions: 0" 
+                       style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE">
+            
+            <!-- Farmers' Questions Tab -->
+            <Tab text="❓ Farmers' Questions">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <Label text="Filter by Status:" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                        <ComboBox fx:id="statusFilterCombo" promptText="All Questions" prefWidth="150"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="🔄 Refresh" onAction="#refreshQuestions" 
+                                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 13px; -fx-padding: 8 20;"/>
+                    </HBox>
+                    
+                    <Separator/>
+                    
+                    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="questionsContainer" spacing="15" style="-fx-padding: 10;"/>
+                    </ScrollPane>
+                </VBox>
+            </Tab>
+            
+            <!-- Other Experts' Answers Tab -->
+            <Tab text="👥 Expert Community">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <Label text="Browse answers from other experts" 
+                           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <Separator/>
+                    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="expertAnswersContainer" spacing="15" style="-fx-padding: 10;"/>
+                    </ScrollPane>
+                </VBox>
+            </Tab>
+            
+            <!-- My Answers Tab -->
+            <Tab text="✅ My Answers">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <Label text="Questions you have answered" 
+                           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <Separator/>
+                    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="myAnswersContainer" spacing="15" style="-fx-padding: 10;"/>
+                    </ScrollPane>
+                </VBox>
+            </Tab>
+
+            <!-- Messages Tab -->
+            <Tab text="💬 Messages" fx:id="messagesTab"/>
+            
+            <!-- My Ratings Tab -->
+            <Tab text="⭐ My Ratings">
+                <VBox spacing="10" style="-fx-padding: 20;">
+                    <Label text="Answers you've received ratings for" 
+                           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <Separator/>
+                    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="myRatingsContainer" spacing="15" style="-fx-padding: 10;"/>
+                    </ScrollPane>
+                </VBox>
+            </Tab>
+            
+        </TabPane>
+    </center>
+</BorderPane>
