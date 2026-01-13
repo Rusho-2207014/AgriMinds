@@ -18,16 +18,12 @@ public class DashboardController {
     private TabPane mainTabPane;
     @FXML
     private Tab dashboardTab;
-    @FXML
-    private Tab myCropsTab;
+
     @FXML
     private Tab askExpertTab;
     @FXML
     private Tab marketTab;
-    @FXML
-    private Tab offersTab;
-    @FXML
-    private Tab weatherTab;
+
     @FXML
     private Tab messagesTab;
 
@@ -45,11 +41,10 @@ public class DashboardController {
     public void initialize() {
         try {
             loadTabContent(dashboardTab, "/fxml/tabs/dashboard-tab.fxml");
-            loadTabContent(myCropsTab, "/fxml/tabs/crops-tab.fxml");
+
             loadTabContent(askExpertTab, "/fxml/tabs/questions-tab.fxml");
             loadTabContent(marketTab, "/fxml/tabs/market-tab.fxml");
-            loadTabContent(offersTab, "/fxml/tabs/offers-tab.fxml");
-            loadTabContent(weatherTab, "/fxml/tabs/weather-tab.fxml");
+
             loadTabContent(messagesTab, "/fxml/tabs/messages-tab.fxml");
 
         } catch (Exception e) {
@@ -64,17 +59,11 @@ public class DashboardController {
             tab.setContent(content);
 
             Object controller = loader.getController();
-            if (controller instanceof CropsController) {
-                ((CropsController) controller).setCurrentUser(currentUser);
-            } else if (controller instanceof QuestionsController) {
+            if (controller instanceof QuestionsController) {
                 QuestionsController qController = (QuestionsController) controller;
                 qController.setCurrentUser(currentUser);
                 qController.setMainTabPane(mainTabPane);
                 qController.setMessagesTab(messagesTab);
-            } else if (controller instanceof WeatherController) {
-                ((WeatherController) controller).setCurrentUser(currentUser);
-            } else if (controller instanceof OffersController) {
-                ((OffersController) controller).setCurrentUser(currentUser);
             } else if (controller instanceof MarketController) {
                 ((MarketController) controller).setCurrentUser(currentUser);
             } else if (controller instanceof DashboardTabController) {

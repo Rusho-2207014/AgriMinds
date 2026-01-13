@@ -48,7 +48,6 @@
                 </toggleGroup>
             </RadioButton>
             <RadioButton fx:id="expertRadio" style="-fx-font-size: 13px;" text="Expert" toggleGroup="$userTypeGroup" />
-            <RadioButton fx:id="buyerRadio" style="-fx-font-size: 13px;" text="Buyer" toggleGroup="$userTypeGroup" />
         </HBox>
 
         <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-padding: 10 0;">

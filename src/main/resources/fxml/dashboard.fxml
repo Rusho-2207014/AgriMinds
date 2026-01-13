@@ -22,11 +22,8 @@
     <center>
         <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE">
             <Tab text="🏠 Dashboard" fx:id="dashboardTab"/>
-            <Tab text="🌾 My Crops" fx:id="myCropsTab"/>
             <Tab text="💬 Ask Expert" fx:id="askExpertTab"/>
             <Tab text="💰 Market Prices" fx:id="marketTab"/>
-            <Tab text="📊 Buyer Offers" fx:id="offersTab"/>
-            <Tab text="🌤 Weather" fx:id="weatherTab"/>
             <Tab text="💬 Messages" fx:id="messagesTab"/>
         </TabPane>
     </center>

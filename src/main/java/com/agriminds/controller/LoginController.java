@@ -1,11 +1,10 @@
 package com.agriminds.controller;
 
-import com.agriminds.model.Buyer;
 import com.agriminds.model.Expert;
 import com.agriminds.model.Farmer;
 import com.agriminds.model.LoginHistory;
 import com.agriminds.repository.LoginHistoryRepository;
-import com.agriminds.service.BuyerService;
+
 import com.agriminds.service.ExpertService;
 import com.agriminds.service.FarmerService;
 import javafx.fxml.FXML;
@@ -31,8 +30,7 @@ public class LoginController {
     private RadioButton farmerRadio;
     @FXML
     private RadioButton expertRadio;
-    @FXML
-    private RadioButton buyerRadio;
+
     @FXML
     private ToggleGroup userTypeGroup;
     @FXML
@@ -46,7 +44,7 @@ public class LoginController {
 
     private FarmerService farmerService;
     private ExpertService expertService;
-    private BuyerService buyerService;
+
     private LoginHistoryRepository loginHistoryRepository;
     private Stage primaryStage;
     private Object currentUser;
@@ -57,7 +55,7 @@ public class LoginController {
     public LoginController() {
         this.farmerService = new FarmerService();
         this.expertService = new ExpertService();
-        this.buyerService = new BuyerService();
+
         this.loginHistoryRepository = new LoginHistoryRepository();
         this.prefs = Preferences.userNodeForPackage(LoginController.class);
         this.emailPasswordMap = new HashMap<>();
@@ -115,7 +113,7 @@ public class LoginController {
             return;
         }
 
-        currentUserType = farmerRadio.isSelected() ? "farmer" : expertRadio.isSelected() ? "expert" : "buyer";
+        currentUserType = farmerRadio.isSelected() ? "farmer" : "expert";
 
         boolean authenticated = false;
         Long userId = null;
@@ -134,13 +132,7 @@ public class LoginController {
                 userId = expertOpt.get().getId();
                 authenticated = true;
             }
-        } else if ("buyer".equals(currentUserType)) {
-            Optional<Buyer> buyerOpt = buyerService.authenticate(email, password);
-            if (buyerOpt.isPresent()) {
-                currentUser = buyerOpt.get();
-                userId = buyerOpt.get().getId();
-                authenticated = true;
-            }
+
         }
 
         if (authenticated && userId != null) {
@@ -182,7 +174,7 @@ public class LoginController {
 
     @FXML
     private void handleRegister() {
-        String userType = farmerRadio.isSelected() ? "farmer" : expertRadio.isSelected() ? "expert" : "buyer";
+        String userType = farmerRadio.isSelected() ? "farmer" : "expert";
         showRegisterDialog(userType);
     }
 
@@ -209,14 +201,6 @@ public class LoginController {
                 controller.setCurrentExpert((Expert) currentUser);
                 primaryStage.setScene(new Scene(root, 1200, 800));
 
-            } else if ("buyer".equals(currentUserType)) {
-                fxmlPath = "/fxml/buyer-dashboard.fxml";
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-                Parent root = loader.load();
-                BuyerController controller = loader.getController();
-                controller.setPrimaryStage(primaryStage);
-                controller.setCurrentBuyer((Buyer) currentUser);
-                primaryStage.setScene(new Scene(root, 1200, 800));
             }
 
         } catch (Exception e) {
